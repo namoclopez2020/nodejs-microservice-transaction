@@ -8,7 +8,7 @@ async function startServer() {
 
   const app = server.getApp();
   container(app);
-  app.use(loadControllers('api/modules/**/*.controller.ts', { cwd: __dirname }));
+  app.use(loadControllers('Infrastructure/Controllers/*.controller.ts', { cwd: __dirname }));
 
   return app;
 }
