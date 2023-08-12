@@ -2,7 +2,7 @@ import { ITransactionRepository } from '../../Domain/Interfaces/transaction.repo
 import { Transaction as TransactionEntity} from '../../Domain/Entities/transaction.entity';
 import { UUID } from 'crypto';
 import { Transaction } from './Entities/transaction.entity';
-import myDataSource from '../../data-source';
+import myDataSource from './dataSources/data-source';
 
 export class TransactionRepository implements ITransactionRepository {
     async save(transaction: TransactionEntity): Promise<void> 

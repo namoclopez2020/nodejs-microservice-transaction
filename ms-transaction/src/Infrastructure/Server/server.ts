@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import config from '../src/config';
-import myDataSource from './data-source';
+import config from './config';
+import myDataSource from '../Repositories/dataSources/data-source';
 export default class Server {
   private port = Number(config.PORT);
 

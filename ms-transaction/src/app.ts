@@ -1,6 +1,6 @@
 import { loadControllers } from 'awilix-express';
-import Server from './server';
-import container from './container';
+import Server from './Infrastructure/Server/server';
+import container from './Infrastructure/Server/container';
 
 async function startServer() {
   const server = new Server();

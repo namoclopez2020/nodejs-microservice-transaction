@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm"
-import envConfig from "./config";
+import envConfig from "../../Server/config";
 // import { User } from './entities/user.entity';
-import { Transaction } from "./Infrastructure/Repositories/Entities/transaction.entity";
+import { Transaction } from "../Entities/transaction.entity";
 
 const myDataSource = new DataSource({
     type: "postgres",
