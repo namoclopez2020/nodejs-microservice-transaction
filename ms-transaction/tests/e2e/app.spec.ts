@@ -1,11 +1,15 @@
 import request from 'supertest';
-import app from '../../src/app';
+import { appInstance } from '../../src/app'
 
 describe('Pruebas de integración para el servidor Express', () => {
-  it('Debería responder con un mensaje de saludo', async () => {
-    const response = await request(app).get('/greetings');
+  it('Debería responder con un mensaje de saludo', async (done) => {
+    const app = await appInstance;
+
+    const response = await request(app).get('/users');
 
     expect(response.status).toBe(200);
-    expect(response.text).toBe('Hola, bienvenido a mi servidor Express!');
+    expect(response.text).toBe("[]");
+
+    done(); // Importante llamar a done() cuando la prueba asíncrona ha terminado
   });
 });

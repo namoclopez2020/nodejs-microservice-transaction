@@ -1,18 +1,18 @@
-import express from 'express'
-import envConfig from './config';
-import bodyParser from 'body-parser';
-import helmet from 'helmet';
-import routes from './routes';
+import { loadControllers } from 'awilix-express';
+import Server from './server';
+import container from './container';
 
-const app = express();
+async function startServer() {
+  const server = new Server();
+  await server.initializeApp();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(helmet());
-app.use(routes)
+  const app = server.getApp();
+  container(app);
+  app.use(loadControllers('api/modules/**/*.controller.ts', { cwd: __dirname }));
 
-app.listen(envConfig.PORT, () => {
-  console.log(`El servidor está escuchando en el puerto ${envConfig.PORT}`);
-});
+  return app;
+}
 
-export default app
+const appInstance = startServer();
+
+export { appInstance };

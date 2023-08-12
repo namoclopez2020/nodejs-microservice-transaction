@@ -1,0 +1,17 @@
+import { DataSource } from "typeorm"
+import envConfig from "./config";
+import { User } from './entities/user.entity';
+
+const myDataSource = new DataSource({
+    type: "postgres",
+    host: envConfig.DB_HOST,
+    port: envConfig.DB_PORT,
+    username: envConfig.DB_USER,
+    password: envConfig.DB_PASSWORD,
+    database: envConfig.DB_NAME,
+    entities: [User],
+    logging: false,
+    synchronize: true, //only por develop
+})
+
+export default myDataSource;

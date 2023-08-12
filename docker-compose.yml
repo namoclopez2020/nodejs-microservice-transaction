@@ -7,7 +7,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=12345
-      - POSTGRES_DB=transactions
+      - POSTGRES_DB=test
     volumes:
       - postgres-vol:/var/lib/postgresql/data
   zookeeper:
