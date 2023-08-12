@@ -1,11 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import config from '../src/config'
-import myDataSource from './data-source';
-import { User } from './entities/user.entity';
-import router from './routes';
-
+import config from './config';
+import myDataSource from '../Repositories/dataSources/data-source';
 export default class Server {
   private port = Number(config.PORT);
 
@@ -36,7 +33,6 @@ export default class Server {
     this.app.use(express.json());
     this.app.use(cors());
     this.app.use(helmet());
-    this.app.use(router);
   }
 
   private runServer(): void {

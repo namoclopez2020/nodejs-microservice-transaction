@@ -1,6 +1,6 @@
 import { loadControllers } from 'awilix-express';
-import Server from './server';
-import container from './container';
+import Server from './Infrastructure/Server/server';
+import container from './Infrastructure/Server/container';
 
 async function startServer() {
   const server = new Server();
@@ -8,7 +8,7 @@ async function startServer() {
 
   const app = server.getApp();
   container(app);
-  app.use(loadControllers('api/modules/**/*.controller.ts', { cwd: __dirname }));
+  app.use(loadControllers('Infrastructure/Controllers/*.controller.ts', { cwd: __dirname }));
 
   return app;
 }
