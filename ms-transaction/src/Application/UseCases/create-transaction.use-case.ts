@@ -20,7 +20,6 @@ export default class CreateTransactionUseCase {
         updatedAt: new Date(),
     });
 
-    console.log(transaction)
     await this.transactionRepository.save(transaction);
   }
 }

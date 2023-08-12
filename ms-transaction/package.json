@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "start:dev": "ts-node-dev --respawn --transpile-only ./src/app.ts",
     "lint": "eslint '*/**/*.ts' --quiet --fix",
-    "test": "jest"
+    "test": "jest --runInBand --detectOpenHandles --forceExit"
   },
   "keywords": [],
   "author": "",
@@ -41,6 +41,7 @@
     "express": "^4.17.1",
     "express-validator": "^7.0.1",
     "helmet": "^4.1.1",
+    "kafkajs": "^2.2.4",
     "mysql": "^2.18.1",
     "pg": "^8.11.2",
     "reflect-metadata": "^0.1.13",

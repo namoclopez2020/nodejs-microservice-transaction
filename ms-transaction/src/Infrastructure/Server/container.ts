@@ -4,6 +4,7 @@ import express from 'express';
 import { CreateTransactionCommandHandler } from '../../Application/Commands/Handler/create-transaction.handler';
 import CreateTransactionUseCase from '../../Application/UseCases/create-transaction.use-case';
 import { TransactionRepository } from '../Repositories/transaction.repository';
+import { KafkaService } from '../Brokers/kafka';
 
 export default (app: express.Application) => {
   const container = createContainer({
@@ -13,7 +14,8 @@ export default (app: express.Application) => {
   container.register({
     createTransactionCommandHandler: asClass(CreateTransactionCommandHandler).scoped(),
     createTransactionUseCase: asClass(CreateTransactionUseCase).scoped(),
-    transactionRepository: asClass(TransactionRepository).scoped()
+    transactionRepository: asClass(TransactionRepository).scoped(),
+    kafkaService: asClass(KafkaService).scoped()
   });
 
   app.use(scopePerRequest(container));

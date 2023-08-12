@@ -8,14 +8,14 @@ import { CreateTransactionDto } from '../../Application/Dto/Http/create-transact
 @route('/transactions')
 export default class TransactionController {
     public constructor(
-        private readonly createTransactionCommandHandler: CreateTransactionCommandHandler
+        private readonly createTransactionCommandHandler: CreateTransactionCommandHandler,
     ) {}
 
     @POST()
     public async createTransaction(
         req: Request,
         res: Response
-    ): Promise<any> {
+    ): Promise<Response> {
         try {
             const validationRules: ValidationChain[] = [
                 body('transactionExternalId').isUUID(),
@@ -43,10 +43,10 @@ export default class TransactionController {
             );
 
             await this.createTransactionCommandHandler.execute(newTransaction);
-
-            res.status(201).json({ message: 'Transaction created successfully' });
         } catch (error) {
             res.status(500).json({ error: 'An error occurred while creating the transaction' });
         }
+
+        return res.status(201).json({ message: 'Transaction created successfully' });
     }
 }
