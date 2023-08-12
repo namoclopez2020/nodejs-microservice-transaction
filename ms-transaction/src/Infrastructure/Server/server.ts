@@ -3,10 +3,11 @@ import cors from 'cors';
 import helmet from 'helmet';
 import config from './config';
 import myDataSource from '../Repositories/dataSources/data-source';
+
 export default class Server {
   private port = Number(config.PORT);
-
   private app!: express.Application;
+  private server: any | null = null;
 
   public async initializeApp(): Promise<void> {
     try {
@@ -36,6 +37,16 @@ export default class Server {
   }
 
   private runServer(): void {
-    this.app.listen(this.port, () => console.log('Running in the port %s', this.port));
+    this.server = this.app.listen(this.port, () => console.log('Running in the port %s', this.port));
+  }
+
+  async closeApp() {
+    if (this.server) {
+      this.server.close((err: any) => {
+        if (err) {
+          console.error('Error closing server:', err);
+        }
+      });
+    }
   }
 }

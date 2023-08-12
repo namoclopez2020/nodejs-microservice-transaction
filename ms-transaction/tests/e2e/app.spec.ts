@@ -1,9 +1,19 @@
 import request from 'supertest';
-import { appInstance } from '../../src/app'
+import { appInstance, serverInstance } from '../../src/app'
+import myDataSource from '../../src/Infrastructure/Repositories/dataSources/data-source';
+import express from 'express';
+import { KafkaService } from '../../src/Infrastructure/Brokers/kafka';
 
-describe('Pruebas de integración para el servidor Express', () => {
-  it('Debería responder con un mensaje de saludo', async (done) => {
-    const app = await appInstance;
+let app: express.Application;
+let kafkaService: KafkaService;
+
+beforeAll(done => {
+  done()
+})
+
+describe('e2e tests for transaction api', () => {
+  it('should save a transaction', async (done) => {
+    app = await appInstance;
 
     const response = await request(app)
       .post('/transactions')
@@ -19,7 +29,20 @@ describe('Pruebas de integración para el servidor Express', () => {
     expect(response.body).toEqual({
       "message": "Transaction created successfully"
     });
-
+    
     done();
   });
 });
+
+afterAll(async done => {
+  if (serverInstance) {
+    await serverInstance.closeApp();
+  }
+
+  if (kafkaService) {
+    await kafkaService.closeConnection();
+  }
+
+  myDataSource.destroy()
+  done()
+})
