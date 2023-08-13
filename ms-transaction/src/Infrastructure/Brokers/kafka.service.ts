@@ -1,6 +1,7 @@
 import { Kafka, Partitioners } from 'kafkajs';
 import envConfig from '../Server/config';
 import { IKafkaService } from '../../Domain/Interfaces/kafka.service.interface';
+import { IMessageHandler } from '../../Domain/Interfaces/message.handler.interface';
 
 export class KafkaService implements IKafkaService {
     private kafka: Kafka;
@@ -10,12 +11,10 @@ export class KafkaService implements IKafkaService {
             clientId: 'my-app',
             brokers: [envConfig.KAFKA_BROKER],
         });
-
-        this.runConsumer('transaction.updated')
     }
 
     async sendEvent(topic: string, message: object): Promise<void> {
-        const producer = this.kafka.producer({ createPartitioner: Partitioners.LegacyPartitioner });
+        const producer = this.kafka.producer();
         await producer.connect();
 
         await producer.send({
@@ -28,7 +27,7 @@ export class KafkaService implements IKafkaService {
         await producer.disconnect();
     }
 
-    async runConsumer(topic: string): Promise<void> {
+    async runConsumer(topic: string, messageHandler: IMessageHandler): Promise<void> {
         const consumer = this.kafka.consumer({ groupId: 'test-group' });
 
         await consumer.connect();
@@ -39,7 +38,8 @@ export class KafkaService implements IKafkaService {
                 if (message.value !== null) {
                     const value = message.value.toString();
                     console.log(`Received message from topic ${topic}, partition ${partition}: ${value}`);
-                    
+
+                    await messageHandler.handleMessage(topic, partition, value)
                 } else {
                     console.log(`Received null message from topic ${topic}, partition ${partition}`);
                 }

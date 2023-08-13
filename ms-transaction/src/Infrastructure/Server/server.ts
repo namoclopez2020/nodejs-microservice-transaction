@@ -3,11 +3,19 @@ import cors from 'cors';
 import helmet from 'helmet';
 import config from './config';
 import myDataSource from '../Repositories/dataSources/data-source';
+import { KafkaService } from '../Brokers/kafka.service';
+import { getConsumers } from '../Brokers/consumer-registry';
+import '../Brokers/register-consumer.container'
 
 export default class Server {
   private port = Number(config.PORT);
   private app!: express.Application;
   private server: any | null = null;
+  private kafkaService: KafkaService;
+
+  constructor() {
+    this.kafkaService = new KafkaService();
+  }
 
   public async initializeApp(): Promise<void> {
     try {
@@ -17,6 +25,7 @@ export default class Server {
       this.createApp();
       this.configApp();
       this.runServer();
+      this.runConsumers();
     } catch (err) {
       console.error("Error during Data Source initialization:", err);
     }
@@ -47,6 +56,13 @@ export default class Server {
           console.error('Error closing server:', err);
         }
       });
+    }
+  }
+
+  async runConsumers() {
+    const consumers = getConsumers();
+    for (const consumer of consumers) {
+      await this.kafkaService.runConsumer(consumer.topic, consumer.handler);
     }
   }
 }
