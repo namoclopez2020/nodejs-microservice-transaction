@@ -2,12 +2,13 @@ import request from 'supertest';
 import { appInstance, serverInstance } from '../../src/app'
 import myDataSource from '../../src/Infrastructure/Repositories/dataSources/data-source';
 import express from 'express';
-import { KafkaService } from '../../src/Infrastructure/Brokers/kafka';
+import { KafkaService } from '../../src/Infrastructure/Brokers/kafka.service';
 
 let app: express.Application;
 let kafkaService: KafkaService;
 
 beforeAll(done => {
+  kafkaService = new KafkaService()
   done()
 })
 

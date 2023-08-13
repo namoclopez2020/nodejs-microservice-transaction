@@ -4,7 +4,7 @@ import express from 'express';
 import { CreateTransactionCommandHandler } from '../../Application/Commands/Handler/create-transaction.handler';
 import CreateTransactionUseCase from '../../Application/UseCases/create-transaction.use-case';
 import { TransactionRepository } from '../Repositories/transaction.repository';
-import { KafkaService } from '../Brokers/kafka';
+import { KafkaService } from '../Brokers/kafka.service';
 
 export default (app: express.Application) => {
   const container = createContainer({
