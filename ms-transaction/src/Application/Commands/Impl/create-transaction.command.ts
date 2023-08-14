@@ -1,10 +1,8 @@
-import { UUID } from 'crypto';
-
 export class CreateTransactionCommand {
     constructor(
-      public readonly transactionExternalId: UUID,
-      public readonly accountExternalIdDebit: UUID,
-      public readonly accountExternalIdCredit: UUID,
+      public readonly transactionExternalId: string,
+      public readonly accountExternalIdDebit: string,
+      public readonly accountExternalIdCredit: string,
       public readonly tranferTypeId: number,
       public readonly value: number
     ) {}

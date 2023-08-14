@@ -1,10 +1,9 @@
-import { UUID } from 'crypto';
 import { TransactionStatus } from '../Constants/transaction-status.constant';
 
 export type TransactionProperties = {
-    readonly transactionExternalId: UUID,
-    readonly accountExternalIdDebit: UUID,
-    readonly accountExternalIdCredit: UUID,
+    readonly transactionExternalId: string,
+    readonly accountExternalIdDebit: string,
+    readonly accountExternalIdCredit: string,
     readonly tranferTypeId: number,
     readonly value: number,
     readonly status: TransactionStatus,
@@ -13,9 +12,9 @@ export type TransactionProperties = {
 };
 
 export class Transaction {
-    private readonly transactionExternalId: UUID
-    private readonly accountExternalIdDebit: UUID
-    private readonly accountExternalIdCredit: UUID
+    private readonly transactionExternalId: string
+    private readonly accountExternalIdDebit: string
+    private readonly accountExternalIdCredit: string
     private readonly tranferTypeId: number
     private readonly value: number
     private readonly status: TransactionStatus
@@ -26,7 +25,7 @@ export class Transaction {
         Object.assign(this, properties);
     }
 
-    getTransactionExternalId(): UUID {
+    getTransactionExternalId(): string {
         return this.transactionExternalId;
     }
 
@@ -34,11 +33,11 @@ export class Transaction {
         return this.status;
     }
 
-    getAccountExternalIdDebit(): UUID {
+    getAccountExternalIdDebit(): string {
         return this.accountExternalIdDebit;
     }
 
-    getAccountExternalIdCredit(): UUID {
+    getAccountExternalIdCredit(): string {
         return this.accountExternalIdCredit;
     }
 

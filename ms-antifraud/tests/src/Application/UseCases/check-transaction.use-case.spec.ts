@@ -12,9 +12,9 @@ describe('CheckTransactionUseCase', () => {
     const useCase = new CheckTransactionUseCase();
 
     const transaction = new TransactionCreatedDto(
-        uuidv4(),
-        uuidv4(),
-        uuidv4(),
+        uuidv4().toString(),
+        uuidv4().toString(),
+        uuidv4().toString(),
         1,
         1500
     );
@@ -35,9 +35,9 @@ describe('CheckTransactionUseCase', () => {
     const useCase = new CheckTransactionUseCase();
 
     const transaction = new TransactionCreatedDto(
-        uuidv4(),
-        uuidv4(),
-        uuidv4(),
+        uuidv4().toString(),
+        uuidv4().toString(),
+        uuidv4().toString(),
         1,
         800
     );
