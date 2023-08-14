@@ -23,7 +23,7 @@ export class GetTransactionQueryHandler {
                 name: transaction.getStatus()
             },
             value: transaction.getValue(),
-            createdAt: transaction.getCreatedAt().toDateString()
+            createdAt: transaction.getCreatedAt().toISOString()
         } : null
     }
 }
