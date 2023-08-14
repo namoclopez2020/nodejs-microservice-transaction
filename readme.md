@@ -14,7 +14,7 @@
 3. Enter to directory `ms-antifraud` and run `yarn start:dev` to start the server.
 4. Enter to directory `ms-transaction` and run `yarn install` to install dependencies.
 5. Enter to directory `ms-transaction` and run `yarn start:dev` to start the server.
-6. Create a `.env` file and set environment variables. You can guide from `.env.example` file.
+6. Create a `.env` file in each project and set environment variables. You can guide from `.env.example` file located in each root directory project.
 
 # API Documentation
 
