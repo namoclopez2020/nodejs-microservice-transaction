@@ -16,6 +16,8 @@
 5. Enter to directory `ms-transaction` and run `yarn start:dev` to start the server.
 6. Create a `.env` file in each project and set environment variables. You can guide from `.env.example` file located in each root directory project.
 
+* For test go to root directory in each projects and run `yarn run test`.
+
 # API Documentation
 
 ## Transaction
