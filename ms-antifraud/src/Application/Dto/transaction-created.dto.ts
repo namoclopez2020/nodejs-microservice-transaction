@@ -1,5 +1,3 @@
-import { UUID } from 'crypto';
-
 export class TransactionCreatedDto {
   readonly transactionExternalId: string;
   readonly accountExternalIdDebit: string;

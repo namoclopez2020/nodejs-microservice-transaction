@@ -1,4 +1,3 @@
-import { UUID } from 'crypto';
 import { TransactionStatus } from '../../../Domain/Constants/transaction-status.constant';
 import { Entity, Generated, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
@@ -6,17 +5,17 @@ import { Entity, Generated, Column, PrimaryGeneratedColumn, CreateDateColumn, Up
 export class Transaction {
   @PrimaryGeneratedColumn()
   @Generated('uuid')
-  transactionExternalId: UUID;
+  transactionExternalId: string;
 
   @Column({
     type: 'varchar'
   })
-  accountExternalIdDebit: UUID;
+  accountExternalIdDebit: string;
 
   @Column({
     type: 'varchar'
   })
-  accountExternalIdCredit: UUID;
+  accountExternalIdCredit: string;
 
   @Column('int')
   tranferTypeId: number;
